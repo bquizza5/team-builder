@@ -11,15 +11,21 @@ function App() {
 
   const [memberToEdit, setMemberToEdit] = useState([])
 
-  function Edit(member) {
-    setMemberToEdit([...memberToEdit, member])
-    console.log(`memberToEdit sent: ${memberToEdit.name}`)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    role: ''
+});
+
+  function Edit(user) {
+    setMemberToEdit(user)
+    console.log(`memberToEdit sent: ${memberToEdit}`)
   }
 
   return (
     <div className="App">
 
-      <PageForm setUserList={setUserList} userList={userList} memberToEdit={memberToEdit} />
+      <PageForm setUserList={setUserList} userList={userList} memberToEdit={memberToEdit} formData={formData} setFormData={setFormData} />
 
       <div className="top">
         <p>Name</p>
