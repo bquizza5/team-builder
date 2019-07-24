@@ -1,24 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import PageForm from "./Form"
+import { useState } from 'react'
+
+
 
 function App() {
+
+  const [userList, setUserList] = useState([])
+
+  const [memberToEdit, setMemberToEdit] = useState([])
+
+  function Edit(member) {
+    setMemberToEdit([...memberToEdit, member])
+    console.log(`memberToEdit sent: ${memberToEdit.name}`)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <PageForm setUserList={setUserList} userList={userList} memberToEdit={memberToEdit} />
+
+      <div className="top">
+        <p>Name</p>
+        <p>Email</p>
+        <p>Role</p>
+        <p>Edit</p>
+      </div>
+
+      {
+        userList.map(user => {
+          return (
+
+            <div className='user'>
+              <p>{user.name}</p>
+              <p>{user.email}</p>
+              <p>{user.role}</p>
+              <button onClick={() => {Edit(user)}}>Edit</button>
+            </div>
+          )
+        })
+      }
+
+
+
     </div>
   );
 }
